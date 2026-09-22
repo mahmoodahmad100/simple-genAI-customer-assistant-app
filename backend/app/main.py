@@ -1,9 +1,19 @@
+from contextlib import asynccontextmanager
+
 from fastapi import FastAPI
 
 from app.chat import handle_chat
+from app.rag.store import ingest_policy
 from app.schemas import ChatRequest, ChatResponse, HealthResponse
 
-app = FastAPI(title="OmniCare Customer Assistant")
+
+@asynccontextmanager
+async def lifespan(_app: FastAPI):
+    ingest_policy()
+    yield
+
+
+app = FastAPI(title="OmniCare Customer Assistant", lifespan=lifespan)
 
 
 @app.get("/api/v1/health", response_model=HealthResponse)

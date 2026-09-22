@@ -2,3 +2,8 @@ fastapi
 uvicorn
 pytest
 httpx
+langgraph
+langchain
+langchain-groq
+langchain-ollama
+chromadb
