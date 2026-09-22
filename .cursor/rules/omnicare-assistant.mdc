@@ -1,0 +1,30 @@
+---
+description: OmniCare Financial customer assistant product context and capabilities
+alwaysApply: true
+---
+
+# OmniCare Customer Assistant
+
+Prototype for OmniCare Financial, an enterprise insurer. Policyholders contact support to check coverage or manage claims.
+
+Stack: lightweight web UI, FastAPI backend, and a GenAI agent. Keep `/frontend` and `/backend` separate.
+
+## Capabilities
+
+1. **Coverage Q&A (RAG)** — Answer from internal policy documents and cite the source.
+2. **Claim status** — Look up status through a backend tool, not from model memory.
+3. **Submit claim** — Create a claim through an operational tool that persists the result.
+
+## Agent behavior
+
+- Route each turn to retrieval, claim lookup, claim submission, or a short clarification.
+- Do not invent policy terms, coverage limits, or claim statuses. If retrieval or the tool returns nothing, say so.
+- Every coverage answer includes a citation (document name plus section or chunk id).
+
+```text
+User: Does my auto policy cover rental cars?
+Agent: retrieve_policy_docs → answer from chunks → cite "auto-policy.pdf §4.2"
+
+User: What is the status of claim CLM-1042?
+Agent: get_claim_status(claim_id="CLM-1042") → return the tool result
+```

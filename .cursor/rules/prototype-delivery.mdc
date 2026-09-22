@@ -1,0 +1,30 @@
+---
+description: Prototype delivery bar, zero-cost stack, and quality standards
+alwaysApply: true
+---
+
+# Delivery and Constraints
+
+## Must ship
+
+- Clean Python with `/frontend` and `/backend` separated.
+- A Dockerfile per service and a root `docker-compose.yml`. `docker-compose up` starts the full stack.
+- `README.md` with an architecture diagram (ASCII or image), a 2-minute build and run, why the AI framework was chosen (LangGraph, LangChain, CrewAI, ADK, LiveKit, or Pipecat), and sample curl or Postman requests.
+- A pytest suite covering backend endpoints, tool calls, and RAG retrieval.
+- A markdown walkthrough with screenshots of the UI in action.
+
+## Zero cost
+
+Use a local vector store (Chroma, FAISS, or Qdrant local) and a free-tier LLM key (OpenAI, Anthropic, or Groq) or local Ollama. Do not add paid cloud services.
+
+```text
+# Good
+Chroma on disk + Groq or Ollama
+
+# Avoid
+Pinecone, Weaviate Cloud, or any metered vector API
+```
+
+## Quality
+
+Prefer clear architecture and working features over UI polish. Use small modules, typed request and response models, and tools with explicit inputs and outputs.
