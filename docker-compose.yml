@@ -1,6 +1,6 @@
 # Copy .env.example to .env before starting the stack.
-# The frontend service has no Dockerfile yet. Start the API with:
-#   docker compose up backend
+# docker compose up starts the API and the Streamlit chat.
+# Ollama starts only with: docker compose --profile ollama up
 
 services:
   backend:
@@ -16,8 +16,14 @@ services:
   frontend:
     build:
       context: ./frontend
+    ports:
+      - "8501:8501"
     env_file:
       - .env
+    environment:
+      API_BASE_URL: http://backend:8000
+    depends_on:
+      - backend
     volumes:
       - ./data:/data:ro
 
