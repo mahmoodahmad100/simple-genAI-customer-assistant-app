@@ -1,0 +1,27 @@
+# Wiring only. Dockerfiles are not part of the starter setup, so this file
+# does not boot until the frontend and backend services are added.
+# Copy .env.example to .env before starting the stack.
+
+services:
+  backend:
+    build:
+      context: ./backend
+    env_file:
+      - .env
+    volumes:
+      - ./data:/data:ro
+
+  frontend:
+    build:
+      context: ./frontend
+    env_file:
+      - .env
+    volumes:
+      - ./data:/data:ro
+
+  ollama:
+    image: ollama/ollama
+    profiles:
+      - ollama
+    ports:
+      - "11434:11434"
