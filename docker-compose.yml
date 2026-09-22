@@ -1,11 +1,13 @@
-# Wiring only. Dockerfiles are not part of the starter setup, so this file
-# does not boot until the frontend and backend services are added.
 # Copy .env.example to .env before starting the stack.
+# The frontend service has no Dockerfile yet. Start the API with:
+#   docker compose up backend
 
 services:
   backend:
     build:
       context: ./backend
+    ports:
+      - "8000:8000"
     env_file:
       - .env
     volumes:
